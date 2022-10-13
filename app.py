@@ -1,4 +1,4 @@
-from teste import sentimentAnalisis
+import boto3
 import json
 from flask import request, Flask, render_template
 
@@ -64,6 +64,25 @@ def sentimentTrans(sentiment):
         return padrao + "Neutro"
     elif sentiment == "MIXED":
         return padrao + "Misto"
+
+def sentimentAnalisis(txt):
+    try:
+        comprehend = boto3.client(service_name='comprehend', region_name='us-east-2')
+
+        lan = json.dumps(comprehend.detect_dominant_language(Text = txt), sort_keys=True, indent=4)
+    
+        lanAux = json.loads(lan)
+        lanList = list(lanAux.items())
+        languageTxtUser = lanList[0][1][0]['LanguageCode']
+
+        sentiment = json.dumps(comprehend.detect_sentiment(Text=txt, LanguageCode=str(languageTxtUser)), sort_keys=True, indent=4)
+        sentimentAux = json.loads(sentiment)
+        sentimentList = list(sentimentAux.items())
+        sentimentTxtUser = sentimentList[1][1]
+
+        return languageTxtUser, sentimentTxtUser
+    except:
+        return "", ""
 
 if __name__ == "__main__":
     app.run(debug=True)
