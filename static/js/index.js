@@ -16,6 +16,7 @@ function sentiment(){
         data:JSON.stringify(dictValuesJason),
         success: function(data){
             function addInformation(info){
+                console.log(info)
 
                 var elementLang = document.querySelector(".language")
                 var elementSent = document.querySelector(".sentiment")

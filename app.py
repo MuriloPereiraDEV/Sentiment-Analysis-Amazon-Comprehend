@@ -1,3 +1,4 @@
+from email.policy import default
 import boto3
 import json
 from flask import request, Flask, render_template
