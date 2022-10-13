@@ -17,7 +17,11 @@ def test():
     languageTxtUser, sentimentTxtUser = sentimentAnalisis(result['txtUser'])
 
     if (languageTxtUser == '') & (sentimentTxtUser == ''):
+        print(languageTxtUser)
+        print(sentimentTxtUser)
+        print("foi")
         return ['Falha na compreensão do idioma. Tente novamente.', '']
+        
 
     languageTxtUser = langaugeTrans(languageTxtUser)
     sentimentTxtUser = sentimentTrans(sentimentTxtUser)
@@ -86,3 +90,5 @@ def sentimentAnalisis(txt):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+#https://softexsentimentanalysis.herokuapp.com/
