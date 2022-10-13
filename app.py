@@ -2,35 +2,6 @@ import boto3
 import json
 from flask import request, Flask, render_template
 
-app = Flask(__name__,template_folder='templates')
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/test', methods=['POST'])
-def test():
-    output = request.get_json() 
-    result = json.loads(output)
-    languageTxtUser, sentimentTxtUser = sentimentAnalisis(result['txtUser'])
-
-    if (languageTxtUser == '') & (sentimentTxtUser == ''):
-        print(languageTxtUser)
-        print(sentimentTxtUser)
-        print("foi")
-        return ['Falha na compreensão do idioma. Tente novamente.', '']
-        
-
-    languageTxtUser = langaugeTrans(languageTxtUser)
-    sentimentTxtUser = sentimentTrans(sentimentTxtUser)
-
-    info = [languageTxtUser, sentimentTxtUser]
-
-    return info
-
-
 def langaugeTrans(language):
     padrao = "Idioma: "
     if language == "pt":
@@ -87,6 +58,31 @@ def sentimentAnalisis(txt):
         return languageTxtUser, sentimentTxtUser
     except:
         return "", ""
+
+
+app = Flask(__name__,template_folder='templates')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/test', methods=['POST'])
+def test():
+    output = request.get_json() 
+    result = json.loads(output)
+    languageTxtUser, sentimentTxtUser = sentimentAnalisis(result['txtUser'])
+
+    if (languageTxtUser == '') & (sentimentTxtUser == ''):
+        return ['Falha na compreensão do idioma. Tente novamente.', '']
+        
+
+    languageTxtUser = langaugeTrans(languageTxtUser)
+    sentimentTxtUser = sentimentTrans(sentimentTxtUser)
+
+    info = [languageTxtUser, sentimentTxtUser]
+
+    return info
+
 
 if __name__ == "__main__":
     app.run(debug=True)
