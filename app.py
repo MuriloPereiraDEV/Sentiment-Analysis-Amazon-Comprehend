@@ -43,7 +43,7 @@ def sentimentTrans(sentiment):
 
 def sentimentAnalisis(txt):
 
-    comprehend = boto3.client(service_name='comprehend', region_name='us-east-2')
+    comprehend = boto3.client(service_name='comprehend', region_name='us-east-2', aws_access_key_id='AKIATZOH3ABIO23YYXYS', aws_secret_access_key='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')
 
     lan = json.dumps(comprehend.detect_dominant_language(Text = txt), sort_keys=True, indent=4)
     
