@@ -1,0 +1,30 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+
+<body>
+    <div class="input-container">
+        <div class="input-container-header">
+            <img src="../static/img/Logo.png">
+            <h1>Sentiment Analysis</h1>
+        </div>
+        <div class="input-area">
+            <textarea id="txt-user" placeholder="Insira seu texto!"></textarea>
+            <button onclick="sentiment()">Analise</button>
+        </div>
+    </div>
+    <div class="result">
+        <div class="language">
+            <h1 class="language-h1" id="language-h1"></h1>
+        </div>
+        <div class="sentiment">
+            <h1 class="sentiment-h1" id="sentiment-h1"></h1>
+        </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
