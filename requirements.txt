@@ -5,7 +5,7 @@ attrs==21.4.0
 autopep8==1.6.0
 beautifulsoup4==4.11.1
 boto3==1.24.86
-botocore==1.27.89
+botocore==1.27.86
 bs4==0.0.1
 cachetools==5.2.0
 certifi==2022.6.15
