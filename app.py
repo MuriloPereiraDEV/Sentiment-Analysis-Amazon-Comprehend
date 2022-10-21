@@ -1,7 +1,7 @@
-from email.policy import default
 import boto3
 import json
 from flask import request, Flask, render_template
+from data import dados
 
 def langaugeTrans(language):
     padrao = "Idioma: "
@@ -43,7 +43,7 @@ def sentimentTrans(sentiment):
 
 def sentimentAnalisis(txt):
 
-    comprehend = boto3.client(service_name='comprehend', region_name='us-east-2', aws_access_key_id='AKIATZOH3ABIO23YYXYS', aws_secret_access_key='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')
+    comprehend = boto3.client(service_name='comprehend', region_name=dados.REGION_NAME, aws_access_key_id=dados.AWS_ACCESS_KEY_ID, aws_secret_access_key=dados.AWS_SECRET_ACCESS_KEY)
 
     lan = json.dumps(comprehend.detect_dominant_language(Text = txt), sort_keys=True, indent=4)
     
